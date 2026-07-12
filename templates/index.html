@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart News Aggregator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1>Smart News Aggregator</h1>
+        <p class="tagline">Curated headlines with AI-powered summaries</p>
+
+        <form class="search-form" action="/" method="GET">
+            <input
+                type="text"
+                name="query"
+                placeholder="Search news..."
+                value="{{ query if query else '' }}"
+                aria-label="Search news"
+            >
+            <button type="submit">Search</button>
+        </form>
+    </header>
+
+    <main class="site-main">
+
+        {% if error %}
+            <div class="alert alert-error" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        {% macro render_article(article) %}
+            <article class="card">
+                {% if article.image %}
+                    <img src="{{ article.image }}" alt="{{ article.title }}">
+                {% else %}
+                    <div class="card-placeholder"></div>
+                {% endif %}
+
+                <div class="card-body">
+                    <h3>{{ article.title }}</h3>
+
+                    <div class="ai-box">
+                        <div class="ai-title">
+                            {% if article.is_ai_summary %}
+                                AI Summary
+                            {% else %}
+                                Description
+                            {% endif %}
+                        </div>
+
+                        <p class="ai-text">{{ article.summary }}</p>
+                    </div>
+
+                    {% if article.url %}
+                        <a class="card-link" href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
+                            Read Full Article
+                        </a>
+                    {% else %}
+                        <span class="link-unavailable">Link unavailable</span>
+                    {% endif %}
+                </div>
+            </article>
+        {% endmacro %}
+
+        {% if search_mode %}
+
+            <section class="content-section">
+                <h2 class="section-title">Search Results for "{{ query }}"</h2>
+
+                {% if news %}
+                    <div class="container">
+                        {% for article in news %}
+                            {{ render_article(article) }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="empty-state">No articles found for your search. Try a different keyword.</p>
+                {% endif %}
+            </section>
+
+        {% else %}
+
+            {% for category, articles in all_news.items() %}
+
+                <section class="content-section">
+                    <h2 class="section-title">{{ category.title() }}</h2>
+
+                    {% if articles %}
+                        <div class="container">
+                            {% for article in articles %}
+                                {{ render_article(article) }}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="empty-state">No articles available for {{ category.title() }} right now.</p>
+                    {% endif %}
+                </section>
+
+            {% endfor %}
+
+        {% endif %}
+
+    </main>
+
+    <footer class="site-footer">
+        <p>Smart News Aggregator</p>
+        <p class="footer-credits">Built with Flask, NewsAPI &amp; Hugging Face Transformers</p>
+    </footer>
+
+</body>
+</html>
