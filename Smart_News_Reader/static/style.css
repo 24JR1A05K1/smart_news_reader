@@ -1,0 +1,133 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#eef2f7;
+    color:#222;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:42px;
+    color:#1e3a8a;
+}
+
+form{
+    display:flex;
+    justify-content:center;
+    margin-bottom:40px;
+}
+
+input{
+    width:420px;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#2563eb;
+}
+
+button{
+    margin-left:12px;
+    padding:14px 22px;
+    border:none;
+    background:#2563eb;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.category-title{
+    margin:35px 0 20px;
+    color:#2563eb;
+    font-size:30px;
+    border-left:6px solid #2563eb;
+    padding-left:12px;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+    gap:25px;
+    margin-bottom:40px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card h3{
+    padding:18px;
+    font-size:28px;
+    line-height:1.35;
+}
+
+.ai-box{
+    margin:0 18px 18px;
+    padding:15px;
+    background:#eef4ff;
+    border-left:5px solid #2563eb;
+    border-radius:10px;
+}
+
+.ai-title{
+    color:#2563eb;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.ai-text{
+    color:#555;
+    line-height:1.6;
+}
+
+.card a{
+    display:inline-block;
+    margin:0 18px 20px;
+    text-decoration:none;
+    color:#2563eb;
+    font-weight:bold;
+    font-size:17px;
+}
+
+.card a:hover{
+    text-decoration:underline;
+}
+
+footer{
+    text-align:center;
+    margin-top:60px;
+    padding:20px;
+    color:#666;
+}
